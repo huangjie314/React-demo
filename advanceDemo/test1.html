@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+     <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    class Greeting extends React.Component{
+        render(){
+            return (
+                <h1>Hello, {this.props.name}</h1>
+            )
+        }
+    }
+    Greeting.defaultProps = {
+        name: 'Stranger'
+    }
+
+    ReactDOM.render(
+        <Greeting />,
+        document.getElementById('root')
+    )
+</script>
+</html>

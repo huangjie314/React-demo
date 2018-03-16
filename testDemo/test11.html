@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<<div id="root">
+
+</div>
+</body>
+<script type="text/babel">
+    class LoggingButton extends React.Component {
+      handleClick(that) {
+
+        console.log('this is:', this);
+      }
+
+      render() {
+        // 这个语法确保 `this` 被绑定在 handleClick 中
+        return (
+          <button onClick={(e) => this.handleClick()}>
+            Click me
+          </button>
+        );
+      }
+    }
+    ReactDOM.render(
+        <LoggingButton/>,
+        document.getElementById('root')
+    )
+</script>
+</html>

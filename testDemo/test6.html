@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>textarea的赋值使用value属性替代</title>
+     <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+class EssayForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            value: 'Please write an essay about your favorite DOM element.'
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleChange(e){
+        this.setState({value: e.target.value});
+    }
+    handleSubmit(e){
+        alert(`An essay was Submitted ${this.state.value}`);
+        e.preventDefault();
+    }
+    render(){
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    Name:
+                    <textarea value={this.state.value} onChange={this.handleChange}/>
+                </label>
+                <input type="submit" value="submit" name="" />
+            </form>
+        )
+    }
+}
+ReactDOM.render(
+    <EssayForm />,
+    document.getElementById('root')
+
+)
+</script>
+</html>

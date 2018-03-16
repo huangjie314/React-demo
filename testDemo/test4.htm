@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>组合 vs 继承</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    function FancyBorder(props){
+    console.log(this);
+    console.log(props)
+        return (
+            <div className={'FancyBorder FancyBorder-'+props.color}>
+                {props.children}
+            </div>
+        );
+    }
+    function Dialog(props){
+        return (
+            <FancyBorder color="blue">
+                <h1 className="Dialog-title">
+                    {props.title}
+                </h1>
+                <p className="Dialog-message">
+                    {props.message}
+                </p>
+                {props.children}
+            </FancyBorder>
+        )
+    }
+
+    class SignUpDialog extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={
+            login: ''
+            };
+            this.handleChange = this.handleChange.bind(this);
+            this.handleSignUp = this.handleSignUp.bind(this);
+        }
+        handleChange(e){
+            this.setState({login: e.target.value})
+        }
+        handleSignUp(){
+
+            alert(`Welcome aboard, ${this.state.login}!`);
+        }
+        render() {
+            return (
+                <Dialog title="Mars Exploration Program" message="How should we refer to you ?">
+                    <input type="text" onChange={this.handleChange} value={this.state.login} name=""/>
+                    <button onClick={this.handleSignUp}>Sign Me up</button>
+                </Dialog>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <SignUpDialog/>,
+        document.getElementById('root')
+
+    )
+</script>
+</html>

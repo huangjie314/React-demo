@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>不受控组件</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    class NameForm extends React.Component{
+        constructor(props){
+            super(props);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+        handleSubmit(e){
+            alert('A name was submitted:'+ this.input.value);
+            e.preventDefault();
+        }
+        render(){
+            return (
+                <form onSubmit = {this.handleSubmit}>
+                    <label>
+                        Name:
+                        <input type="text" defaultValue="huangjie" ref={(input) => {this.input = input;}} name=""/>
+                    </label>
+                    <input type="submit" value="Submit" name=""/>
+                </form>
+            )
+        }
+    }
+    ReactDOM.render(
+        <NameForm />,
+        document.getElementById('root')
+    )
+</script>
+</html>

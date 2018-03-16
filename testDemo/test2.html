@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    const scaleNames = {
+        c: 'Celsius',
+        f: 'Fahrenheit'
+    }
+    class TemplateInput extends React.Component{
+        constructor(props){
+            super(props);
+            this.handleChange = this.handleChange.bind(this);
+            this.state = {
+                temperature: ''
+            };
+        }
+        handleChange(event){
+            this.setState({temperature: event.target.value});
+            event.preventDefault();
+        }
+        render(){
+            var temperature = this.state.temperature;
+            var scale = this.props.scale;
+            return (
+                <fieldset>
+                    <legend> Enter temperature in {scaleNames[scale]}</legend>
+                    <input value={temperature} onChange={this.handleChange} />
+                </fieldset>
+            )
+        }
+    }
+
+    class Calculator extends React.Component{
+        render(){
+            return (
+                <div>
+                    <TemplateInput scale="c"/>
+                    <TemplateInput scale="f"/>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <Calculator />,
+        document.getElementById('root')
+    )
+</script>
+</html>
