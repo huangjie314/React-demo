@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>性能优化之PureComponet(shouldComponentUpdate)</title>
+     <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    class ListOfWords extends React.PureComponent {
+        constructor(props){
+            super(props);
+        }
+        render() {
+            return <div>{this.props.words.join(',')}</div>;
+        }
+    }
+    class WordAdder extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                words: ['marker']
+            };
+            this.handleClick = this.handleClick.bind(this);
+        }
+        handleClick(){
+            this.setState((prevState) => {
+                words: prevState.words.concat(['marker'])
+            })
+        }
+        render(){
+            return (
+                <div>
+                    <button onClick={this.handleClick}>add word</button>
+                    <ListOfWords words={this.state.words} />
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(
+        <WordAdder />,
+        document.getElementById('root')
+    )
+</script>
+</html>
