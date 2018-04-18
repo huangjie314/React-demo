@@ -71,7 +71,7 @@
     }
     class Board extends React.Component{
         renderSquare(i){
-            return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)}/>
+            return <Square value={this.props.squares[i]} onClick={ this.props.onClick(i)}/>
         }
         render(){
             return (
@@ -96,11 +96,23 @@
         }
     }
     class Game extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                squares: Array(9).fill(null),
+                xIsNext: true,
+            }
+        }
+        handleClick(i){
+            console.log('i',i);
+
+        }
         render(){
+            const status;
             return (
                 <div className="game">
                     <div className="game-board">
-                        <Board />
+                        <Board squares={this.state.squares} onClick={(i) => this.handleClick(i)} />
                     </div>
                     <div className="game-info">
                         <div>{status}</div>
